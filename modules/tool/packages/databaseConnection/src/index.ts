@@ -81,17 +81,22 @@ export async function tool({
       result = await pool.query(sql);
       await pool.close();
     } else if (databaseType === 'DAMENG') {
-      const connection: Connection = await dmdb.getConnection({
-        connectString: host + ':' + port,
-        user: user,
-        password: password,
-        database: databaseName,
-        loginEncrypt: false,
-      });
-
-      const res = await connection.execute(sql);
-      result = res.rows;
-      await connection.close();
+      let connection: Connection | undefined;
+      try {
+        const connection: Connection = await dmdb.getConnection({
+          connectString: host + ':' + port,
+          user: user,
+          password: password,
+          database: databaseName,
+          loginEncrypt: false
+        });
+        const res = await connection.execute(sql);
+        result = res.rows;
+      } finally {
+        if (connection) {
+          await connection.close();
+        }
+      }
     }
     return {
       result
