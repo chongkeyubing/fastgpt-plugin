@@ -33,25 +33,19 @@ const v1 = {
 };
 
 export default defineTool({
-  toolId: 'dbops/mysql',
+  toolId: 'dbops/dameng',
   isWorkerRun: false,
   tags: [ToolTagEnum.enum.tools],
   name: {
-    'zh-CN': 'MySQL',
-    en: 'MySQL'
+    'zh-CN': '达梦',
+    en: 'Dameng'
   },
   description: {
-    'zh-CN': '基于 MySQL 数据库的智能数据库连接工具，支持多种格式输出',
-    en: 'Intelligent database connection tool powered by MySQL with multiple output formats'
+    'zh-CN': '基于 达梦 数据库的智能数据库连接工具，支持多种格式输出',
+    en: 'Intelligent database connection tool powered by Dameng with multiple output formats'
   },
   courseUrl: 'https://www.mysql.com/',
   secretInputConfig: [
-    {
-      key: 'database',
-      label: '数据库名称',
-      required: true,
-      inputType: 'input'
-    },
     {
       key: 'host',
       label: '主机名',
@@ -63,6 +57,12 @@ export default defineTool({
       label: '数据库连接端口号',
       required: true,
       inputType: 'numberInput'
+    },
+    {
+      key: 'database',
+      label: '数据库名称',
+      required: true,
+      inputType: 'input'
     },
     {
       key: 'username',
@@ -77,28 +77,10 @@ export default defineTool({
       inputType: 'secret'
     },
     {
-      key: 'maxConnections',
-      label: '最大连接数',
-      required: false,
-      inputType: 'numberInput'
-    },
-    {
       key: 'connectionTimeout',
-      label: '连接超时时间',
+      label: '连接超时时间（ms）',
       required: false,
       inputType: 'numberInput'
-    },
-    {
-      key: 'charset',
-      label: '字符集',
-      required: false,
-      inputType: 'input'
-    },
-    {
-      key: 'timezone',
-      label: '时区',
-      required: false,
-      inputType: 'input'
     }
   ],
   versionList: [

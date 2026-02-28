@@ -61,3 +61,16 @@ export const OracleInputSchema = z.object({
 });
 
 export type OracleInputType = z.infer<typeof OracleInputSchema>;
+
+export const DaMengInputSchema = z.object({
+  ...BaseSQLDbInputSchema.pick({
+    username: true,
+    password: true,
+    sql: true,
+    host:true,
+    port:true,
+    database: true,
+    connectionTimeout: true,
+  }).shape
+});
+export type DaMengInputType = z.infer<typeof DaMengInputSchema>;

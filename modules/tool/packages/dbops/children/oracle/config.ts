@@ -3,6 +3,7 @@ import { FlowNodeInputTypeEnum, WorkflowIOValueTypeEnum } from '@tool/type/fastg
 import { ToolTagEnum } from '@tool/type/tags';
 
 export default defineTool({
+  toolId: 'dbops/oracle',
   isWorkerRun: false,
   tags: [ToolTagEnum.enum.tools],
   name: {

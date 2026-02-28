@@ -19,14 +19,16 @@
     "mysql2": "^3.15.0",
     "oracledb": "^6.9.0",
     "postgres": "^3.4.7",
-    "zod": "^4"
+    "zod": "^4",
+    "dmdb": "^1.0.46190"
   },
   "keywords": [
     "SQL",
     "Oracle",
     "MySQL",
     "ClickHouse",
-    "Microsoft SQL Server"
+    "Microsoft SQL Server",
+    "DAMENG"
   ],
   "author": "xqvvu",
   "description": "SQL connection tool, made by FastGPT"

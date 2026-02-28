@@ -2,9 +2,11 @@ import { z } from 'zod';
 import { Client as PgClient } from 'pg'; // PostgreSQL 客户端
 import mysql from 'mysql2/promise'; // MySQL 客户端
 import mssql from 'mssql'; // SQL Server 客户端
+import * as dmdb from 'dmdb'; // 导入达梦驱动
+import type { Connection } from 'dmdb'; // 导入驱动类型
 
 // const supportedDatabaseTypes = ['PostgreSQL', 'MySQL', 'Microsoft SQL Server'];
-const supportedDatabaseTypes = z.enum(['PostgreSQL', 'MySQL', 'Microsoft SQL Server']);
+const supportedDatabaseTypes = z.enum(['PostgreSQL', 'MySQL', 'Microsoft SQL Server', 'DAMENG']);
 
 export const InputType = z
   .object({
@@ -78,6 +80,18 @@ export async function tool({
 
       result = await pool.query(sql);
       await pool.close();
+    } else if (databaseType === 'DAMENG') {
+      const connection: Connection = await dmdb.getConnection({
+        connectString: host + ':' + port,
+        user: user,
+        password: password,
+        database: databaseName,
+        loginEncrypt: false,
+      });
+
+      const res = await connection.execute(sql);
+      result = res.rows;
+      await connection.close();
     }
     return {
       result
