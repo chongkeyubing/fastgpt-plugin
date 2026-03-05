@@ -90,7 +90,7 @@ export async function tool({
           database: databaseName,
           loginEncrypt: false
         });
-        const res = await connection.execute(sql);
+        const res = await connection.execute(sql, [], { outFormat: dmdb.OUT_FORMAT_OBJECT });
         result = res.rows;
       } finally {
         if (connection) {
