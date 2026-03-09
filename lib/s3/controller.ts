@@ -26,7 +26,8 @@ export class S3Service {
 
   constructor(
     private readonly _client: IStorage,
-    private readonly _externalClient: IStorage | undefined
+    private readonly _externalClient: IStorage | undefined,
+    private readonly _externalBaseURL: string | undefined
   ) {}
 
   get client(): IStorage {
@@ -35,6 +36,10 @@ export class S3Service {
 
   get externalClient(): IStorage {
     return this._externalClient ?? this._client;
+  }
+
+  get externalBaseURL(): string | undefined {
+    return this._externalBaseURL;
   }
 
   get bucketName(): string {
@@ -239,8 +244,14 @@ export class S3Service {
         }
       });
 
+      let tempUrl = url;
+      if (this.externalBaseURL) {
+        tempUrl = this.externalBaseURL + '/' + url.substring(url.indexOf(this.bucketName));
+      }
+      logger.debug('===============tempUrl', { tempUrl });
+
       return {
-        postURL: url,
+        postURL: tempUrl,
         formData: headers,
         objectName: key
       };
