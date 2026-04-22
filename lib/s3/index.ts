@@ -91,9 +91,6 @@ const createS3Service = async (bucket: string, isPublic: boolean) => {
   try {
     await client.ensureBucket();
     if (isPublic) await ensurePublicPolicy(client);
-
-    await externalClient?.ensureBucket();
-    if (isPublic && externalClient) await ensurePublicPolicy(externalClient);
   } catch (error) {
     const logger = getLogger(infra.storage);
     logger.warn(`Ensure bucket warn: ${JSON.stringify(error, null, 2)}`, { error });

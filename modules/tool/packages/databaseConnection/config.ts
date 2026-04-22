@@ -4,12 +4,13 @@ import { ToolTagEnum } from '@tool/type/tags';
 
 export default defineTool({
   tags: [ToolTagEnum.enum.tools],
+  toolId: 'databaseConnection',
   name: {
     'zh-CN': '数据库连接',
     en: 'Database Connection'
   },
   description: {
-    'zh-CN': '可连接常用数据库，并执行sql',
+    'zh-CN': '可连接常用数据库，并执行sql，支持达梦',
     en: 'Can connect to common databases and execute sql'
   },
   versionList: [
@@ -94,6 +95,10 @@ export default defineTool({
         {
           label: 'Microsoft SQL Server',
           value: 'Microsoft SQL Server'
+        },
+        {
+          label: '达梦',
+          value: 'DAMENG'
         }
       ]
     },
